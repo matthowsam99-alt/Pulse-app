@@ -56,7 +56,6 @@ export const INDICATOR_COLORS: Record<string, string> = {
   life_expectancy:       '#58D68D',   // mint green
   suicide_rate:          '#6B8E5A',   // sage                 — muted, sensitive
   homelessness:          '#7D9B6A',   // muted olive green
-  antidepressants:       '#A9C99A',   // pale sage
   food_bank_usage:       '#2ECC71',   // emerald
   prison_population:     '#4A7A3D',   // dark olive
   gini_coefficient:      '#239B56',   // forest green
@@ -78,13 +77,14 @@ export const INDICATOR_COLORS: Record<string, string> = {
   temp_anomaly:          '#76B7A0',   // muted sage teal
   drought_index:         '#0E7A65',   // deep teal
 
-  // ── HEALTH (purples → violets → mauves) ──────────────────────────────────
-  antidepressant_prescriptions: '#8B5CF6',   // vivid violet
-  mental_health_hospitalisations: '#7C3AED', // deep purple
-  psychological_distress:        '#A78BFA',  // medium purple
-  cancer_incidence:              '#6D28D9',  // dark violet
-  autism_diagnosis_rate:         '#C4B5FD',  // light purple
-  obesity_rate:                  '#5B21B6',  // deep indigo
+  // ── HEALTH (pinks → violets → mauves) ────────────────────────────────────
+  antidepressant_prescriptions:      '#8B5CF6',   // vivid violet
+  mental_health_hospitalisations:    '#7C3AED',   // deep purple
+  psychological_distress:            '#A78BFA',   // medium purple
+  cancer_incidence:                  '#6D28D9',   // dark violet
+  autism_diagnosis_rate:             '#C4B5FD',   // light purple
+  obesity_rate:                      '#5B21B6',   // deep indigo
+  alcohol_consumption:               '#EC4899',   // pink — the good-news outlier
 }
 
 /**

@@ -170,17 +170,7 @@ export const CURATED_VIEWS: Array<{ name: string; description: string; state: Ch
   },
   {
     name: 'The quiet crisis',
-    description: 'Mental health, prescriptions and wellbeing as Australia got richer',
-    state: {
-      activeIds: ['antidepressant_prescriptions', 'mental_health_hospitalisations', 'psychological_distress', 'gdp_per_capita'],
-      viewMode: 'cumulative',
-      startYear: 2000,
-      activeEventCategories: ['election', 'policy', 'crisis'],
-    }
-  },
-  {
-    name: 'The quiet crisis',
-    description: 'Mental health, prescriptions and prosperity since 2000',
+    description: 'Mental health, prescriptions and prosperity since 2000 — Australia got wealthier and more distressed simultaneously',
     state: {
       activeIds: ['antidepressant_prescriptions', 'mental_health_hospitalisations', 'psychological_distress', 'gdp_per_capita'],
       viewMode: 'cumulative',
