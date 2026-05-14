@@ -12,6 +12,7 @@ import ChartHeader from '@/components/ChartHeader'
 import ShareBar from '@/components/ShareBar'
 import AboutModal from '@/components/AboutModal'
 import MobileBlock from '@/components/MobileBlock'
+import MobileLayout from '@/components/mobile/MobileLayout'
 
 const DEFAULT_STATE: ChartState = {
   activeIds: [],
@@ -205,7 +206,26 @@ export default function PulsePage() {
   }
 
   return (
-    <MobileBlock>
+    <MobileBlock
+      mobileContent={
+        <MobileLayout
+          manifest={manifest}
+          events={events}
+          activeIds={activeIds}
+          loadedIndicators={loadedIndicators}
+          viewMode={viewMode}
+          startYear={startYear}
+          endYear={endYear}
+          activeEventCategories={activeEventCategories}
+          onToggleIndicator={toggleIndicator}
+          onLoadState={loadState}
+          onToggleEventCategory={(cat) => setActiveEventCategories(prev =>
+            prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
+          )}
+          mountedDate={mountedDate}
+        />
+      }
+    >
     <div className="flex h-screen overflow-hidden bg-[#FAF8F3]">
       <Sidebar
         manifest={manifest}
