@@ -25,7 +25,7 @@ interface SidebarProps {
   }>
 }
 
-const CATEGORY_ORDER = ['economy', 'housing', 'demographics', 'wellbeing', 'government', 'environment']
+const CATEGORY_ORDER = ['economy', 'housing', 'demographics', 'wellbeing', 'government', 'environment', 'health']
 
 const VIEW_MODES: { key: ViewMode; label: string; tip: string }[] = [
   { key: 'yoy',        label: 'ΔYoY',    tip: 'Year-on-year % change — best for spotting turning points' },

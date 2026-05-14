@@ -77,6 +77,14 @@ export const INDICATOR_COLORS: Record<string, string> = {
   renewable_energy:      '#00CEC9',   // bright aqua
   temp_anomaly:          '#76B7A0',   // muted sage teal
   drought_index:         '#0E7A65',   // deep teal
+
+  // ── HEALTH (purples → violets → mauves) ──────────────────────────────────
+  antidepressant_prescriptions: '#8B5CF6',   // vivid violet
+  mental_health_hospitalisations: '#7C3AED', // deep purple
+  psychological_distress:        '#A78BFA',  // medium purple
+  cancer_incidence:              '#6D28D9',  // dark violet
+  autism_diagnosis_rate:         '#C4B5FD',  // light purple
+  obesity_rate:                  '#5B21B6',  // deep indigo
 }
 
 /**
@@ -102,4 +110,5 @@ export const CATEGORY_COLORS: Record<string, string> = {
   wellbeing:    '#27AE60',
   government:   '#8E44AD',
   environment:  '#16A085',
+  health:       '#8B5CF6',
 }
