@@ -17,6 +17,7 @@ interface PulseChartProps {
   events: EventsFile | null
   activeEventCategories: string[]
   onLoadStory?: (state: any) => void
+  tooltipActive?: boolean
 }
 
 const PROJECTION_START = 2026
@@ -133,7 +134,7 @@ function CustomTooltip({ active, payload, label, activeIndicators, viewMode }: a
 // ── Main chart ─────────────────────────────────────────────────────────────────
 export default function PulseChart({
   chartData, activeIndicators, viewMode,
-  startYear, endYear, events, activeEventCategories, onLoadStory
+  startYear, endYear, events, activeEventCategories, onLoadStory, tooltipActive = true
 }: PulseChartProps) {
   const [hoveredEvent, setHoveredEvent] = React.useState<string | null>(null)
 
@@ -195,6 +196,7 @@ export default function PulseChart({
           <Tooltip
             content={<CustomTooltip activeIndicators={activeIndicators} viewMode={viewMode} />}
             cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+            active={tooltipActive ? undefined : false}
           />
 
           {viewMode === 'yoy' && (
