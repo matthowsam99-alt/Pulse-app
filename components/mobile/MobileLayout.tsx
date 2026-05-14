@@ -138,15 +138,15 @@ export default function MobileLayout({
       {/* ── Chart ────────────────────────────────────────── */}
       <div
         style={{
-          position: view === 'chart' ? 'relative' : 'absolute',
+          position: view === 'chart' ? 'fixed' : 'absolute',
           inset: 0,
           opacity: view === 'chart' ? 1 : 0,
           pointerEvents: view === 'chart' ? 'all' : 'none',
           transition: 'opacity 0.2s',
           zIndex: 2,
-          minHeight: '100svh',
           display: 'flex',
           flexDirection: 'column',
+          background: '#F0EDE6',
         }}
       >
         <MobileChart

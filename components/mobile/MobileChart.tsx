@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { ActiveIndicator, ViewMode, EventsFile } from '@/types/pulse'
 import { CURATED_VIEWS } from '@/lib/share'
 import PulseChart from '@/components/PulseChart'
@@ -52,6 +52,19 @@ export default function MobileChart({
   const story = storyIndex >= 0 && storyIndex < CURATED_VIEWS.length ? CURATED_VIEWS[storyIndex] : null
   const isFirst = storyIndex === 0
   const isLast = storyIndex === totalStories - 1
+
+  // Measure chart area height so inner div gets explicit pixels (required by ResponsiveContainer)
+  const chartAreaRef = useRef<HTMLDivElement>(null)
+  const [chartHeight, setChartHeight] = useState(260)
+  useEffect(() => {
+    if (!chartAreaRef.current) return
+    const ro = new ResizeObserver(entries => {
+      const h = entries[0]?.contentRect.height
+      if (h && h > 0) setChartHeight(h)
+    })
+    ro.observe(chartAreaRef.current)
+    return () => ro.disconnect()
+  }, [])
 
   const firstYear = activeIndicators.length > 0
     ? Math.min(...activeIndicators.map(a => a.data[0]?.date ? parseInt(String(a.data[0].date).slice(0, 4)) : startYear).filter(Boolean))
@@ -192,20 +205,20 @@ export default function MobileChart({
       {/* ── Subheader strip ─────────────────────────────────── */}
       <div
         className="shrink-0"
-        style={{ padding: '6px 12px 5px', borderBottom: '0.5px solid rgba(26,26,24,0.06)' }}
+        style={{ padding: '8px 14px 7px', borderBottom: '0.5px solid rgba(26,26,24,0.06)' }}
       >
         {/* Title row */}
-        <div className="flex items-baseline" style={{ gap: 6, marginBottom: 5, flexWrap: 'nowrap' }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1a18', fontFamily: 'Georgia, serif', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '40%' }}>
+        <div className="flex items-baseline" style={{ gap: 7, marginBottom: 6, flexWrap: 'nowrap' }}>
+          <span style={{ fontSize: 15, fontWeight: 700, color: '#1a1a18', fontFamily: 'Georgia, serif', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '45%' }}>
             {story?.name ?? 'Custom view'}
           </span>
-          <span style={{ fontSize: 9, color: '#8a8a80', flexShrink: 0 }}>
+          <span style={{ fontSize: 11, color: '#8a8a80', flexShrink: 0 }}>
             {displayStart}–2025
           </span>
           {story && (
             <button
               onClick={onOpenLearnMore}
-              style={{ fontSize: 9, color: '#8B1A1A', cursor: 'pointer', background: 'none', border: 'none', padding: 0, fontFamily: 'inherit', flexShrink: 0 }}
+              style={{ fontSize: 11, color: '#8B1A1A', cursor: 'pointer', background: 'none', border: 'none', padding: 0, fontFamily: 'inherit', flexShrink: 0 }}
             >
               Learn more
             </button>
@@ -214,24 +227,21 @@ export default function MobileChart({
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
             <button
               onClick={onToggleEvents}
-              style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 9, color: eventsOn ? '#4a4a44' : '#8a8a80', cursor: 'pointer', background: 'none', border: 'none', padding: 0, fontFamily: 'inherit' }}
+              style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: eventsOn ? '#4a4a44' : '#8a8a80', cursor: 'pointer', background: 'none', border: 'none', padding: 0, fontFamily: 'inherit' }}
             >
               <span>Show events</span>
-              {/* Toggle pip */}
               <span style={{
-                width: 24, height: 13, borderRadius: 7,
+                width: 26, height: 15, borderRadius: 8,
                 background: eventsOn ? '#1a1a18' : 'rgba(26,26,24,0.15)',
                 border: '0.5px solid rgba(26,26,24,0.15)',
                 position: 'relative', display: 'inline-block',
-                transition: 'background 0.15s',
-                flexShrink: 0,
+                transition: 'background 0.15s', flexShrink: 0,
               }}>
                 <span style={{
-                  width: 10, height: 10, borderRadius: '50%', background: '#fff',
-                  position: 'absolute', top: 1.5,
-                  left: eventsOn ? 12 : 1.5,
-                  transition: 'left 0.15s',
-                  display: 'block',
+                  width: 11, height: 11, borderRadius: '50%', background: '#fff',
+                  position: 'absolute', top: 2,
+                  left: eventsOn ? 13 : 2,
+                  transition: 'left 0.15s', display: 'block',
                 }} />
               </span>
             </button>
@@ -244,12 +254,12 @@ export default function MobileChart({
             <div
               key={ind.id}
               style={{
-                display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0,
-                padding: '2px 7px 2px 5px', borderRadius: 20,
-                border: '0.5px solid rgba(26,26,24,0.11)', fontSize: 9, color: '#4a4a44',
+                display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0,
+                padding: '3px 8px 3px 6px', borderRadius: 20,
+                border: '0.5px solid rgba(26,26,24,0.11)', fontSize: 11, color: '#4a4a44',
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: ind.color, flexShrink: 0, display: 'block' }} />
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: ind.color, flexShrink: 0, display: 'block' }} />
               {ind.label}
             </div>
           ))}
@@ -258,11 +268,18 @@ export default function MobileChart({
 
       {/* ── Chart ───────────────────────────────────────────── */}
       <div
-        className="flex-1 relative"
-        style={{ minHeight: 0, overflowX: 'auto', overflowY: 'hidden', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+        ref={chartAreaRef}
+        style={{
+          flex: 1,
+          minHeight: 0,
+          position: 'relative',
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          WebkitOverflowScrolling: 'touch',
+        } as React.CSSProperties}
       >
-        {/* Inner container — fixed 680px so chart never gets squashed on portrait */}
-        <div style={{ width: 680, height: '100%', position: 'relative' }}>
+        {/* Inner container — 680px min-width so chart never squashes on portrait */}
+        <div style={{ width: 'max(100%, 680px)', height: chartHeight || 260, position: 'relative' }}>
           <PulseChart
             chartData={mergeSeriesForChart(activeIndicators.map(a => ({ id: a.id, series: a.data })))}
             activeIndicators={activeIndicators}
