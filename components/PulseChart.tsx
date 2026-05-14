@@ -158,8 +158,11 @@ export default function PulseChart({
   }))
   const rows = assignRows(pointEventsWithYears)
 
-  // Chart needs extra top margin to accommodate staggered label rows
-  const topMargin = ROW_Y.length > 0 ? ROW_Y[ROW_Y.length - 1] + 62 : 80
+  // Chart needs extra top margin to accommodate staggered label rows.
+  // When no events are visible, collapse to a minimal margin.
+  const topMargin = visibleEvents.length > 0
+    ? ROW_Y[ROW_Y.length - 1] + 62
+    : 24
 
   return (
     <div className="h-full w-full">
