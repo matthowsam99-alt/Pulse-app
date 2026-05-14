@@ -64,7 +64,7 @@ export default function MobileChart({
   )
 
   return (
-    <div className="flex flex-col h-full" style={{ background: '#F0EDE6' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, background: '#F0EDE6' }}>
 
       {/* ── Header ─────────────────────────────────────────── */}
       <div
@@ -257,17 +257,23 @@ export default function MobileChart({
       </div>
 
       {/* ── Chart ───────────────────────────────────────────── */}
-      <div className="flex-1 overflow-hidden relative" style={{ minHeight: 0 }}>
-        <PulseChart
-          chartData={mergeSeriesForChart(activeIndicators.map(a => ({ id: a.id, series: a.data })))}
-          activeIndicators={activeIndicators}
-          viewMode={viewMode}
-          startYear={startYear}
-          endYear={endYear}
-          events={events}
-          activeEventCategories={activeEventCategories}
-          onLoadStory={onLoadStory}
-        />
+      <div
+        className="flex-1 relative"
+        style={{ minHeight: 0, overflowX: 'auto', overflowY: 'hidden', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+      >
+        {/* Inner container — fixed 680px so chart never gets squashed on portrait */}
+        <div style={{ width: 680, height: '100%', position: 'relative' }}>
+          <PulseChart
+            chartData={mergeSeriesForChart(activeIndicators.map(a => ({ id: a.id, series: a.data })))}
+            activeIndicators={activeIndicators}
+            viewMode={viewMode}
+            startYear={startYear}
+            endYear={endYear}
+            events={events}
+            activeEventCategories={activeEventCategories}
+            onLoadStory={onLoadStory}
+          />
+        </div>
       </div>
     </div>
   )

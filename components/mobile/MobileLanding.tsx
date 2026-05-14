@@ -49,7 +49,7 @@ export default function MobileLanding({ onSelectStory, onOpenIndicators, mounted
                 style={{
                   flexShrink: 0,
                   width: 130,
-                  background: '#F0EDE6',
+                  background: '#ffffff',
                   border: '0.5px solid rgba(26,26,24,0.11)',
                   borderRadius: 8,
                   padding: '9px 10px 8px',
@@ -61,15 +61,15 @@ export default function MobileLanding({ onSelectStory, onOpenIndicators, mounted
                   minHeight: 90,
                 }}
                 onPointerDown={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.background = '#E8E4DC'
+                  ;(e.currentTarget as HTMLButtonElement).style.background = '#F0EDE6'
                   ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(26,26,24,0.3)'
                 }}
                 onPointerUp={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.background = '#F0EDE6'
+                  ;(e.currentTarget as HTMLButtonElement).style.background = '#ffffff'
                   ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(26,26,24,0.11)'
                 }}
                 onPointerLeave={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.background = '#F0EDE6'
+                  ;(e.currentTarget as HTMLButtonElement).style.background = '#ffffff'
                   ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(26,26,24,0.11)'
                 }}
               >

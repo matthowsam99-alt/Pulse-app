@@ -114,16 +114,18 @@ export default function MobileLayout({
   }, [view])
 
   return (
-    <div className="relative w-full h-full overflow-hidden" style={{ background: '#F0EDE6' }}>
+    <div className="relative w-full" style={{ minHeight: '100svh', background: '#F0EDE6' }}>
 
       {/* ── Landing ──────────────────────────────────────── */}
       <div
         style={{
-          position: 'absolute', inset: 0,
+          position: view === 'landing' ? 'relative' : 'absolute',
+          inset: 0,
           opacity: view === 'landing' ? 1 : 0,
           pointerEvents: view === 'landing' ? 'all' : 'none',
           transition: 'opacity 0.2s',
           zIndex: 1,
+          minHeight: '100svh',
         }}
       >
         <MobileLanding
@@ -136,11 +138,15 @@ export default function MobileLayout({
       {/* ── Chart ────────────────────────────────────────── */}
       <div
         style={{
-          position: 'absolute', inset: 0,
+          position: view === 'chart' ? 'relative' : 'absolute',
+          inset: 0,
           opacity: view === 'chart' ? 1 : 0,
           pointerEvents: view === 'chart' ? 'all' : 'none',
           transition: 'opacity 0.2s',
           zIndex: 2,
+          minHeight: '100svh',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <MobileChart
