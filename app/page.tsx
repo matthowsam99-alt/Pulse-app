@@ -195,13 +195,18 @@ export default function PulsePage() {
   const currentState: ChartState = { activeIds, viewMode, startYear, activeEventCategories }
 
   if (loading) {
-    return (
+    const loadingScreen = (
       <div className="flex items-center justify-center min-h-screen bg-[#FAF8F3]">
         <div className="text-center">
           <div className="text-5xl mb-3" style={{ fontFamily: 'Georgia, serif' }}>Pulse</div>
           <div className="text-xs text-gray-400 tracking-[0.3em] uppercase">Loading Australia&apos;s data...</div>
         </div>
       </div>
+    )
+    return (
+      <MobileBlock mobileContent={loadingScreen}>
+        {loadingScreen}
+      </MobileBlock>
     )
   }
 
@@ -226,7 +231,7 @@ export default function PulsePage() {
         />
       }
     >
-    <div className="flex h-screen overflow-hidden bg-[#FAF8F3]">
+    <div className="flex h-screen overflow-hidden bg-[#FAF8F3]" style={{ minHeight: 0 }}>
       <Sidebar
         manifest={manifest}
         activeIds={activeIds}
@@ -262,7 +267,7 @@ export default function PulsePage() {
         {activeIndicators.length > 0 && (
           <KpiCards activeIndicators={activeIndicators} viewMode={viewMode} startYear={startYear} />
         )}
-        <div className="flex-1 overflow-hidden px-6 pb-2 min-h-0 relative">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 pb-2 min-h-0 relative">
           {chartLoading && (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#FAF8F3]/80 backdrop-blur-[1px]">
               <div className="flex items-center gap-2.5 text-gray-400">

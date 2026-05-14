@@ -65,7 +65,7 @@ const DefaultIcon = (): ReactElement => (
 
 export default function EmptyState({ onLoadStory }: EmptyStateProps) {
   return (
-    <div className="h-full flex flex-col items-center justify-center px-8">
+    <div className="min-h-full flex flex-col items-center justify-center px-8 py-8">
       <div className="text-center mb-10">
         <h2
           className="text-5xl font-bold text-gray-900 mb-3 leading-tight"
