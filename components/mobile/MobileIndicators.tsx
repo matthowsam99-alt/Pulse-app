@@ -42,7 +42,7 @@ export default function MobileIndicators({ manifest, activeIds, onToggle, onAppl
   const panelRef = useRef<HTMLDivElement>(null)
 
   // Group indicators by category
-  const byCategory: Record<string, typeof manifest.indicators> = {}
+  const byCategory: Record<string, NonNullable<typeof manifest>['indicators']> = {}
   if (manifest) {
     for (const ind of manifest.indicators) {
       if (!ind.available) continue
